@@ -23,7 +23,7 @@ public class PatsyJobConfiguration {
     public Step load(StepBuilderFactory stepBuilderFactory) {
         return stepBuilderFactory.get("load")
                 .listener(downloadingStepExecutionListener())
-                .<Flight,Flight>chunk(20)
+                .<Flight,Flight>chunk(2000)
                 .reader(reader(null))
                 .writer(writer(null))
                 .faultTolerant().skipLimit(100)

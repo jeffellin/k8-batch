@@ -1,4 +1,4 @@
-Create table  if not exists delay_data (
+Create table delay_data (
      year VARCHAR(50),
      month VARCHAR(50),
      day VARCHAR(50),
