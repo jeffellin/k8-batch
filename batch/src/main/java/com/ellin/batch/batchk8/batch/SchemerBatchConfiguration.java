@@ -10,6 +10,7 @@ import org.springframework.batch.core.partition.PartitionHandler;
 import org.springframework.batch.core.partition.support.Partitioner;
 import org.springframework.batch.core.partition.support.TaskExecutorPartitionHandler;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.deployer.resource.docker.DockerResource;
 import org.springframework.cloud.deployer.spi.task.TaskLauncher;
 import org.springframework.cloud.task.batch.partition.CommandLineArgsProvider;
 import org.springframework.cloud.task.batch.partition.DeployerPartitionHandler;
@@ -92,10 +93,8 @@ public class SchemerBatchConfiguration {  //extends PatsyJobConfiguration {
             JobExplorer jobExplorer,
             CommandLineArgsProvider commandLineArgsProvider) {
 
-        String resourceLocation = "file:///Users/jeff/.m2/repository/com/ellin/batch/batch-k8/0.0.1-SNAPSHOT/batch-k8-0.0.1-SNAPSHOT.jar";
-
-        Resource resource = context.getResource(resourceLocation);
-
+        Resource resource =  new DockerResource(
+                "harbor.ellin.net/library/batch-k8-task");
 
         DeployerPartitionHandler partitionHandler =
                 new DeployerPartitionHandler(taskLauncher,
